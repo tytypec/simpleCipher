@@ -1,0 +1,91 @@
+<!CODETYPE html>
+
+<html>
+	<head>
+		<title> cipher </title>
+		
+		<style>
+		.mainContainer{
+			display: flex;
+			flex-direction: column;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div class="mainContainer">
+			<label for="keyWord"> Enter your key word <br> </label>
+			<input type="text" id="keyWord" placeholder="Secret key word" name="Enter your key word">
+			<label for="untranscribedText"> Enter your message to be scrabled <br></label>
+			<input type="text" id="untranscribedText" placeholder="message here" name="Enter your text">
+			<button onclick="gainUserTextInputs()">Go</button>
+		</div>
+	</body>
+	
+	<script>
+	
+		const standardAlphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+		
+		function gainUserTextInputs(){
+			var cipherKey = document.getElementById("keyWord").value;
+			var userText = document.getElementById("untranscribedText").value;
+			console.log(cipherKey);
+			
+			transcribeUserMessage(cipherKey,userText);
+		}
+		
+		function transcribeUserMessage(key,text){
+			const userTextArray = Array.from(text);
+			const userKeyArray = Array.from(key);
+			let textNumberValue = [];
+			let alteredAlphabet = [];
+			
+			//userKeyArray.push(userKeyArray.splice(index, 1)[0]);
+			for(let i = 0; i < userTextArray.length; i++){
+				
+				//console.log(standardAlphabet[i]);
+				//we cant get the nested for loop to work booo
+				for(let j = 0; j < 26; j++){
+					if(userTextArray[i] === standardAlphabet[j]){
+						textNumberValue.push(j)
+						//console.log(userTextArray[i]);
+						console.log(textNumberValue)
+						}
+						
+					else{
+						}
+				}
+			}
+			
+			/*for(let i = 0; i < 26; i++){
+				
+				for(let j = 0; j < userKeyArray.length; j++){
+					if (standardAlphabet[i] === userKeyArray[j]){
+						//console.log(standardAlphabet[i]);
+						alteredAlphabet.push(standardAlphabet[i])
+						}
+					else{
+						//alteredAlphabet.push(standardAlphabet[j])
+						}
+					}
+				}*/
+				
+			for(let i = 0; i < userKeyArray.length; i++){
+				
+				for(let j = 0; j < 26; j++){
+					if (standardAlphabet[j] === userKeyArray[i]){
+						//alteredAlphabet.push(alteredAlphabet.splice(index, j)[0]);
+						alteredAlphabet.push(standardAlphabet[j])
+						}
+					if(alteredAlphabet[j] === alteredAlphabet[alteredAlphabet.legnth] ){
+							}
+					else{
+							alteredAlphabet.push(standardAlphabet[j])
+							} //how do you check entire array 
+					}
+				}
+		console.log(alteredAlphabet);
+		}
+		
+	</script>
+</html>
