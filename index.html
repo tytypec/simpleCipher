@@ -1,231 +1,231 @@
 <!CODETYPE html>
 
 <html>
-	<head>
-		<title> cipher </title>
-		
-		<style>
-		body{
-		background: grey;
-		}
-		
-		.mainContainer{
-			
-			display: flex;
-			flex-direction: column;
-			}
-			
-		#transcribedUserText{
-			margin-top: 30px;
-			font-size: 22;
-			}
-		</style>
-	</head>
-	
-	<body>
-		<div class="mainContainer">
-			<label for="keyWord"> Enter your key word <br> </label>
-			<input type="text" id="keyWord" placeholder="Secret key word" content="hat" name="Enter your key word">
-			<label for="untranscribedText"> Enter your message to be scrabled <br></label>
-			<input type="text" id="untranscribedText" placeholder="message here" content="message" name="Enter your text">
-			<button onclick="gainUserTextInputs()">Go</button>
-			<div id="transcribedUserText">
-			</div>
-		</div>
-	</body>
-	
-	<script>
-	
-		const standardAlphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-		
-		function gainUserTextInputs(){
-			var cipherKey = document.getElementById("keyWord").value;
-			var userText = document.getElementById("untranscribedText").value;
-			
-			//console.log(cipherKey);
-			run(cipherKey,userText);
-		}
-		//console.log(cipherKey);
+  <head>
+    <title>cipher</title>
 
-			
-function encoder(key) {
-			
-				let encoded = "";
-				//let boggle ="";
-		
-		// This array represents the
-		// 26 letters of alphabets
-		let arr = new Array(26);
-		for(let i=0;i<26;i++)
-		{
-			arr[i]=false;
-		}
+    <style>
+      body {
+        background: grey;
+      }
 
-			// This loop inserts the keyword
-			// at the start of the encoded string
-			for (let i = 0; i < key.length; i++)
-			{
-				if (key[i].charCodeAt(0) >= 'A'.charCodeAt(0) &&
-				key[i].charCodeAt(0) <= 'Z'.charCodeAt(0))
-				{
-					// To check whether the character is inserted
-					// earlier in the encoded string or not
-					if (arr[key[i].charCodeAt(0) - 65] == false)
-					{
-						encoded += ( key[i]);
-						arr[key[i].charCodeAt(0) - 65] = true;
-					}
-				}
-				else if (key[i].charCodeAt(0) >= 'a'.charCodeAt(0) &&
-				key[i].charCodeAt(0) <= 'z'.charCodeAt(0))
-				{
-					if (arr[key[i].charCodeAt(0) - 97] == false)
-					{
-						encoded +=
-						String.fromCharCode(key[i].charCodeAt(0) - 32);
-						arr[key[i].charCodeAt(0) - 97] = true;
-					}
-				}
-			}
+      .mainContainer {
+        display: flex;
+        flex-direction: column;
+      }
 
-			// This loop inserts the remaining
-			// characters in the encoded string.
-			for (let i = 0; i < 26; i++)
-			{
-				if (arr[i] == false)
-				{
-					arr[i] = true;
-					encoded += String.fromCharCode(i + 65);
-				}
-			}
+      #transcribedUserText {
+        margin-top: 30px;
+        font-size: 22;
+      }
+    </style>
+  </head>
 
-			
-				let keyNumbersToBeSliced = (26 + key.length);
-				//console.log(keyNumbersToBeSliced)
-				let tempEndKey = encoded + encoded.substring(0,key.length);
-				console.log("tempendkey  ", tempEndKey)
-				//let boggle = tempEndKey.slice(key.length, keyNumbersToBeSliced) //+ encoded.substring(0,key.length) ;
-				let finalCipherKeyWithWordAtEnd = tempEndKey.slice(key.length, keyNumbersToBeSliced);
-				
-				
-				return finalCipherKeyWithWordAtEnd; //where is my variable being hoisted
-	}
+  <body>
+    <div class="mainContainer">
+      <label for="keyWord"> Enter your key word <br /> </label>
+      <input
+        type="text"
+        id="keyWord"
+        placeholder="Secret key word"
+        content="hat"
+        name="Enter your key word"
+      />
+      <label for="untranscribedText">
+        Enter your message to be scrabled <br
+      /></label>
+      <input
+        type="text"
+        id="untranscribedText"
+        placeholder="message here"
+        content="message"
+        name="Enter your text"
+      />
+      <button onclick="gainUserTextInputs()">Go</button>
+      <div id="transcribedUserText"></div>
+    </div>
+  </body>
+
+  <script>
+    const standardAlphabet = [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "i",
+      "j",
+      "k",
+      "l",
+      "m",
+      "n",
+      "o",
+      "p",
+      "q",
+      "r",
+      "s",
+      "t",
+      "u",
+      "v",
+      "w",
+      "x",
+      "y",
+      "z",
+    ];
+
+    function gainUserTextInputs() {
+      var cipherKey = document.getElementById("keyWord").value;
+      var userText = document.getElementById("untranscribedText").value;
+
+      var cipherKey = "secret"
+      var userText = "Zombie Here"
+      //run(cipherKey, userText);
+      myVeryOwnEncoder(cipherKey,userText);
+    }
+
+    gainUserTextInputs();
+    
+    function myVeryOwnEncoder(key,text){
+      let abc = "abcdefghijklmnopqrstuvwxyz".split("");
+      console.log(abc);
+      let duplicatesRemoved = removeDuplicateLetters(key);
+      console.log(duplicatesRemoved);
+      let newAlphabet = removeDuplicateLetters(duplicatesRemoved.concat(abc));
+      console.log(newAlphabet);
+    }
+
+    //returns index of letter of alphabet
+    function alphabetInedx(alphabet,letter){
 
 
-		function transcribeUserMessage(text,alteredKey){
-			const userTextArray = Array.from(text);
-			const userKeyArray = Array.from(alteredKey);
-			let finalNumberMessage = [];
-			let textNumberValue = [];
-			let alteredAlphabet = [];
-			let transcribedMessageText = [];
-			
-			//userKeyArray.push(userKeyArray.splice(index, 1)[0]);
-			for(let i = 0; i < userTextArray.length; i++){
-				
-				//console.log(standardAlphabet[i]);
-				//we cant get the nested for loop to work booo
-				for(let j = 0; j < 26; j++){
-					if(standardAlphabet[j] === userTextArray[i]){
-						//textNumberValue.push(j);
-						//console.log(userTextArray[i]);
-						finalNumberMessage.push(j);
-						}
-						
-					else{
-						}
-				}
-				
+    }
 
-			}
-			for(let k = 0; k < userTextArray.length; k++){
-			//console.log(userTextArray[k]);
-			//console.log(standardAlphabet);
-				for(let l = 0; l < userKeyArray.length; l++){
-					//console.log(userKeyArray[l],userTextArray[k]);
-					if(userTextArray[k] === userKeyArray[l] ){
-						finalMessage.push(standardAlphabet[l]);
-						}
-					else{}//console.log("else area", userTextArray)}
-					}
-			}
-			
-			//console.log("is this my array", textNumberValue);
-			console.log("this is the final message:  ", finalNumberMessage);
-			
-			for(let m = 0; m < finalNumberMessage.length; m++){
-				//console.log("m loop",finalNumberMessage[m]) //this gives up our untranscribed numbers
-				//console.log("usertextarray  ", userKeyArray[m]);
-				for(let n = 0; n < userKeyArray.length; n++){
-					if(n === finalNumberMessage[m]){
-						transcribedMessageText.push(userKeyArray[n])
-						}
-					else{}
-					} 
-				
-				}
-			console.log("inside", userKeyArray);
-			//let tempEndKey = encoded + encoded.substring(0,key.length);
-			//let arrayMessageToString = transcribedMessageText.substring(0,5);
-			//console.log(arrayMessageToString);
-			//console.log("transcribedMessageText  ", transcribedMessageText);
-			
-			addTranscribedMessageTohtml(transcribedMessageText);
-		}
-		
-		function addTranscribedMessageTohtml(htmlMessage){
-			//console.log(htmlMessage)
-			let htmlMessageString = htmlMessage.join("");
-			//console.log(foog);
-			var printKey = document.getElementById("keyWord").value;
-			const element = document.getElementById("transcribedUserText");
-			element.innerHTML += "With the keyword:  " + printKey + "<br>" + "Your transcribed message is:  " + htmlMessageString + " <br>";
-			}
-		
-	function run(pleaseWork,theText){
-	// Driver code
-	// Hold the Keyword
-	let key;
-	key = pleaseWork;
-	//document.write("Keyword : " + key+"<br>");
+    //computational complexity (big O)
+    function removeDuplicateLetters(phrase){
+      let unique = [];
+      if(typeof phrase === "string"){
+        phrase = phrase.split("");
+      }
 
-	// Function call to generate encoded text
-	let encoded = encoder(key.split(""));
-	//let encoded = boggle(key.split(""));
-	//let finalCipherKey = boggle(key.split(""));
-	//console.log("alphabet after key:  ",encoded);
-	//console.log("should be at the end:  ",finalCipherKey);
-	transcribeUserMessage(theText,encoded);
-	}
-			/*for(let i = 0; i < 26; i++){
-				
-				for(let j = 0; j < userKeyArray.length; j++){
-					if (standardAlphabet[i] === userKeyArray[j]){
-						//console.log(standardAlphabet[i]);
-						alteredAlphabet.push(standardAlphabet[i])
-						}
-					else{
-						//alteredAlphabet.push(standardAlphabet[j])
-						}
-					}
-				}*/
-				
-			/*for(let i = 0; i < userKeyArray.length; i++){
-				
-				for(let j = 0; j < 26; j++){
-					if (standardAlphabet[j] === userKeyArray[i]){
-						//alteredAlphabet.push(alteredAlphabet.splice(index, j)[0]);
-						alteredAlphabet.push(standardAlphabet[j])
-						}
-					if(alteredAlphabet[j] === alteredAlphabet[alteredAlphabet.legnth] ){
-							}
-					else{
-							alteredAlphabet.push(standardAlphabet[j])
-							} //how do you check entire array 
-					}
-				} 
-		console.log(alteredAlphabet);
-		}*/
-		
-	</script>
+      phrase.forEach(function(letter){ 
+        if(!unique.includes(letter)){
+          unique.push(letter);
+        }
+      });
+      return unique;
+    }
+
+    function run(key, theText) {
+      let encoded = encoder(key.split(""));
+      transcribeUserMessage(theText, encoded);
+    }
+
+    // key - Array<string> - the cypher key string represented as an array of characters
+    function encoder(key) {
+    	let encoded = "";
+      //console.log("console log key", key)
+      // This array represents the
+      // 26 letters of alphabets
+      let arr = new Array(26);
+      for (let i = 0; i < 26; i++) {
+        arr[i] = false;
+      }
+
+      // This loop inserts the keyword
+      // at the start of the encoded string
+      for (let i = 0; i < key.length; i++) {
+        if (
+          key[i].charCodeAt(0) >= "A".charCodeAt(0) &&
+          key[i].charCodeAt(0) <= "Z".charCodeAt(0)
+        ) {
+          // To check whether the character is inserted
+          // earlier in the encoded string or not
+          if (arr[key[i].charCodeAt(0) - 65] == false) {
+            encoded += key[i];
+            arr[key[i].charCodeAt(0) - 65] = true;
+          }
+        } else if (
+          key[i].charCodeAt(0) >= "a".charCodeAt(0) &&
+          key[i].charCodeAt(0) <= "z".charCodeAt(0)
+        ) {
+          if (arr[key[i].charCodeAt(0) - 97] == false) {
+            encoded += String.fromCharCode(key[i].charCodeAt(0) - 32);
+            arr[key[i].charCodeAt(0) - 97] = true;
+          }
+        }
+      }
+
+      // This loop inserts the remaining
+      // characters in the encoded string.
+      for (let i = 0; i < 26; i++) {
+        if (arr[i] == false) {
+          arr[i] = true;
+          encoded += String.fromCharCode(i + 65);
+        }
+      }
+
+      let keyNumbersToBeSliced = 26 + key.length;
+      let tempEndKey = encoded + encoded.substring(0, key.length);
+      console.log("tempendkey  ", tempEndKey);
+      let finalCipherKeyWithWordAtEnd = tempEndKey.slice(
+        key.length,
+        keyNumbersToBeSliced
+      )
+
+      return finalCipherKeyWithWordAtEnd; 
+    }
+
+    function transcribeUserMessage(text, alteredKey) {
+      const userTextArray = Array.from(text);
+      const userKeyArray = Array.from(alteredKey);
+      let finalNumberMessage = [];
+      let textNumberValue = [];
+      let alteredAlphabet = [];
+      let transcribedMessageText = [];
+
+      for (let i = 0; i < userTextArray.length; i++) {
+        for (let j = 0; j < 26; j++) {
+          if (standardAlphabet[j] === userTextArray[i]) {
+            finalNumberMessage.push(j);
+          }
+        }
+      }
+      for (let k = 0; k < userTextArray.length; k++) {
+        for (let l = 0; l < userKeyArray.length; l++) {
+          if (userTextArray[k] === userKeyArray[l]) {
+            finalMessage.push(standardAlphabet[l]);
+          } 
+        }
+      }
+      console.log("this is the final message:  ", finalNumberMessage);
+
+      for (let m = 0; m < finalNumberMessage.length; m++) {
+        for (let n = 0; n < userKeyArray.length; n++) {
+          if (n === finalNumberMessage[m]) {
+            transcribedMessageText.push(userKeyArray[n]);
+          }
+        }
+      }
+      console.log("inside", userKeyArray);
+      addTranscribedMessageTohtml(transcribedMessageText);
+    }
+
+    function addTranscribedMessageTohtml(htmlMessage) {
+      let htmlMessageString = htmlMessage.join("");
+      var printKey = document.getElementById("keyWord").value;
+      const element = document.getElementById("transcribedUserText");
+      element.innerHTML +=
+        "With the keyword:  " +
+        printKey +
+        "<br>" +
+        "Your transcribed message is:  " +
+        htmlMessageString +
+        " <br>";
+    }
+
+
+  </script>
 </html>
