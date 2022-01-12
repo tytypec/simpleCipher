@@ -47,34 +47,6 @@
   </body>
 
   <script>
-    const standardAlphabet = [
-      "a",
-      "b",
-      "c",
-      "d",
-      "e",
-      "f",
-      "g",
-      "h",
-      "i",
-      "j",
-      "k",
-      "l",
-      "m",
-      "n",
-      "o",
-      "p",
-      "q",
-      "r",
-      "s",
-      "t",
-      "u",
-      "v",
-      "w",
-      "x",
-      "y",
-      "z",
-    ];
 
     function gainUserTextInputs() {
       var cipherKey = document.getElementById("keyWord").value;
@@ -93,13 +65,22 @@
       let abc = "abcdefghijklmnopqrstuvwxyz".split("");
       let textToLower = text.toLowerCase();
       let messageArray = textToLower.split("");
-      console.log(abc);
+      //console.log(abc);
       let duplicatesRemoved = removeDuplicateLetters(key);
-      console.log(duplicatesRemoved);
+      //console.log(duplicatesRemoved);
       let newAlphabet = removeDuplicateLetters(duplicatesRemoved.concat(abc));
-      console.log("new alphabet",newAlphabet);
+      let rotThirteen = "nopqrstuvwxyzabcdefghijklm".split("");
+      let keywordAtEnd = newAlphabet.slice(duplicatesRemoved.length, (26 + duplicatesRemoved.length)).concat(duplicatesRemoved);
+      console.log("keywordatend",keywordAtEnd);
       changeEnteredText(abc,newAlphabet,messageArray)
     }
+
+/*			let keyNumbersToBeSliced = (26 + key.length);
+				//console.log(keyNumbersToBeSliced)
+				let tempEndKey = encoded + encoded.substring(0,key.length);
+				console.log("tempendkey  ", tempEndKey)
+				//let boggle = tempEndKey.slice(key.length, keyNumbersToBeSliced) //+ encoded.substring(0,key.length) ;
+				let finalCipherKeyWithWordAtEnd = tempEndKey.slice(key.length, keyNumbersToBeSliced); */
 
     //returns index of letter of alphabet
     function alphabetInedx(alphabet,letter){
@@ -128,7 +109,10 @@
         console.log(message);
         message.forEach(function(letter,i) {
           abc.forEach(function(letter,j) {
-          if (abc[j] === message[i]) {
+            if (message[i] === " "){
+              finalMessageArray.push(" ");
+            }
+          else if (abc[j] === message[i]) {
             finalMessageArray.push(alphabet[j]);
             
           }
